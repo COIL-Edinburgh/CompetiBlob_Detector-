@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>31.1.0</version>
+		<relativePath />
+	</parent>
+
+	<groupId>bio.coil</groupId>
+	<artifactId>Fungal_Track</artifactId>
+	<version>1.0.1</version>
+
+	<name>Fungal Tip Track</name>
+	<description>A project to measure and track hyphal length and growth</description>
+	<url>https://www.ed.ac.uk/biology/wcb/centre-optical-instrumentation-laboratory-coil</url>
+	<inceptionYear>2024</inceptionYear>
+	<organization>
+		<name>University of Edinburgh</name>
+		<url>https://ed.ac.uk</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>CC0</name>
+			<url>https://creativecommons.org/publicdomain/zero/1.0/</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<!-- See https://imagej.net/Team -->
+		<developer>
+			<id>CoilEdinburgh</id>
+			<name>David Kelly</name>
+			<url>https://www.ed.ac.uk/biology/wcb/centre-optical-instrumentation-laboratory-coil</url>
+			<roles>
+				<role>founder</role>
+				<role>lead</role>
+				<role>developer</role>
+				<role>debugger</role>
+				<role>reviewer</role>
+				<role>support</role>
+				<role>maintainer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Toni McHugh</name>
+		</contributor>
+	</contributors>
+
+	<mailingLists>
+		<mailingList>
+			<name>Image.sc Forum</name>
+			<archive>https://forum.image.sc/tag/imagej</archive>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<connection>scm:git:https://github.com/CoilEdinburgh/Fungal_Track</connection>
+		<developerConnection>scm:git:git@github.com:CoilEdinburgh/Fungal_Track</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/CoilEdinburgh/Fungal_Track</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/CoilEdinburgh/Fungal_Track/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>None</system>
+	</ciManagement>
+
+	<properties>
+		<package-name>bio.coil.CoilEdinburgh.Fungal_Track</package-name>
+		<main-class>Fungal_Track</main-class>
+		<license.licenseName>cc0</license.licenseName>
+		<license.copyrightOwners>University of Edinburgh</license.copyrightOwners>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>scijava.public</id>
+			<url>https://maven.scijava.org/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- User-facing commands -->
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-plugins-commands</artifactId>
+		</dependency>
+		<!-- Run graphically with the classic ImageJ user interface -->
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-legacy</artifactId>
+			
+		</dependency>
+		<!-- Include all Fiji plugins when running -->
+		<dependency>
+			<groupId>sc.fiji</groupId>
+			<artifactId>fiji</artifactId>
+			
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/ome/bioformats_package -->
+		<dependency>
+    		<groupId>ome</groupId>
+    		<artifactId>bioformats_package</artifactId>
+    	  	<version>7.0.0</version> 
+    		<type>pom</type>
+    		<exclusions>
+					<exclusion>
+						<groupId>xalan</groupId>
+						<artifactId>serializer</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xalan</groupId>
+						<artifactId>xalan</artifactId>
+					</exclusion>
+			</exclusions>		
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/ome/bio-formats_plugins 
+	 	<dependency>
+    		<groupId>ome</groupId>
+    		<artifactId>bio-formats_plugins</artifactId>
+    	</dependency>
+		 -->
+		<dependency>
+  			<groupId>io.scif</groupId>
+  			<artifactId>scifio</artifactId>
+		</dependency>
+		
+  		<dependency>
+  			<groupId>io.scif</groupId>
+  			<artifactId>scifio-bf-compat</artifactId>
+		</dependency>
+
+		<dependency>
+  			<groupId>ome</groupId>
+  			<artifactId>formats-gpl</artifactId>
+  			<version>${formats-gpl.version}</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.imglib2/imglib2-labkit -->
+		<dependency>
+    		<groupId>net.imglib2</groupId>
+    		<artifactId>imglib2-labkit</artifactId>
+    		<version>0.2.2</version> 
+		</dependency>
+    
+		<!-- https://mvnrepository.com/artifact/sc.fiji/labkit-ui -->
+		<dependency>
+    		<groupId>sc.fiji</groupId>
+    		<artifactId>labkit-ui</artifactId>
+    		<version>0.3.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/sc.fiji/labkit-pixel-classification -->
+		<dependency>
+    		<groupId>sc.fiji</groupId>
+    		<artifactId>labkit-pixel-classification</artifactId>
+    		<version>0.1.16</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.haesleinhuepf/clij2_ -->
+		<dependency>
+    		<groupId>net.haesleinhuepf</groupId>
+    		<artifactId>clij2_</artifactId>
+    		<version>2.2.1.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.haesleinhuepf/clij-core -->
+		<dependency>
+    		<groupId>net.haesleinhuepf</groupId>
+    		<artifactId>clij-core</artifactId>
+    		<version>1.7.4.0</version>
+		</dependency>
+		
+		
+	</dependencies>
+	
+</project>
+
