@@ -35,6 +35,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -72,6 +73,7 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 
 	RoiManager roiManager;
 	String filename;
+	double pixelsize;
 
 
 	@Override
@@ -93,6 +95,7 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 				//Open file and get filename and filepath
 				IJ.run("Bio-Formats Importer", "open=["+file.getAbsolutePath()+"] autoscale color_mode=Default view=Hyperstack stack_order=XYCZT");
 				ImagePlus imp = WindowManager.getCurrentImage();
+				pixelsize = imp.getCalibration().pixelHeight;
 				filename = FilenameUtils.removeExtension(file.getName());
 
 				//Z-Project
@@ -115,8 +118,8 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 				double[][] output = new double[cells.length][10];
 				String[] titles = new String[10];
 				for (int i = 0; i< cells.length; i++){
-					titles[0] = "Cell Area";
-					output[i][0] = cells[i].totalArea();
+					titles[0] = "Cell Area (um^2)";
+					output[i][0] = cells[i].totalArea()*pixelsize*pixelsize;
 					titles[1] = "Cell Intensity Ch0";
 					output[i][1] = cells[i].totalIntensity(split[0]);
 					titles[2] = "Cell Intensity Ch1";
@@ -124,18 +127,18 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 					titles[3] = "Cell Intensity Ch2";
 					output[i][3] = cells[i].totalIntensity(split[2]);
 
-					titles[4] = "Background Area";
-					output[i][4] = cells[i].cellArea();
+					titles[4] = "Background Area (um^2)";
+					output[i][4] = cells[i].cellArea()*pixelsize*pixelsize;
 					titles[5] = "Background Intensity Ch0";
 					output[i][5] = cells[i].cellIntensity(split[0]);
 					titles[6] = "Background Intensity Ch2";
 					output[i][6] = cells[i].cellIntensity(split[2]);
 
-					titles[7] = "Spots Area";
-					output[i][7] = cells[i].spotsArea();
+					titles[7] = "Spots Area (um^2)";
+					output[i][7] = cells[i].spotsArea()*pixelsize*pixelsize;
 					titles[8] = "Spots Intensity Ch0";
 					output[i][8] = cells[i].spotsIntensity(split[0]);
-					titles[9] = "Spots Intensity Ch0";
+					titles[9] = "Spots Intensity Ch2";
 					output[i][9] = cells[i].spotsIntensity(split[2]);
 				}
 
@@ -208,26 +211,39 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 		}
 	}
 
+	private String[] splitFilename(String filename){
+		int indexEnd = filename.length()-1;
+		if(filename.contains("-Airy")){
+			indexEnd = filename.indexOf("-Airy");
+		}
+		return new String[]{filename.substring(0, indexEnd-2), filename.substring(indexEnd-1, indexEnd)};
+	}
+
 	public void MakeResults(String[] titles, double[][] results) throws IOException {
 		Date date = new Date(); // This object contains the current date value
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
-		String CreateName = Paths.get(String.valueOf(filePath), filename + "_Results.csv").toString();
+		String[] splitFilename = splitFilename(filename);
+		String CreateName = Paths.get(String.valueOf(filePath), splitFilename[0] + "_Results.csv").toString();
+		boolean exists = Files.exists(Paths.get(CreateName));
 		try {
 			FileWriter fileWriter = new FileWriter(CreateName, true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-			bufferedWriter.newLine();
-			bufferedWriter.write(formatter.format(date));
-			bufferedWriter.newLine();
-			bufferedWriter.newLine();
-			String titleString = "Cell, ";
-			for(String title:titles){
-				titleString = titleString + title + ",";
+			//bufferedWriter.newLine();
+			if(!exists) {
+				bufferedWriter.write(formatter.format(date));
+				bufferedWriter.newLine();
+				//bufferedWriter.newLine();
+
+				String titleString = "File, Cell, ";
+				for (String title : titles) {
+					titleString = titleString + title + ",";
+				}
+				bufferedWriter.write(titleString);//write header 1
+				bufferedWriter.newLine();
 			}
-			bufferedWriter.write(titleString);//write header 1
-			bufferedWriter.newLine();
 			for (int i =0; i < results.length; i++) {//for each slice create and write the output string
 				bufferedWriter.newLine();
-				String resultsString = (i+1)+",";
+				String resultsString = splitFilename[1]+","+ (i+1)+",";
 				for (double result:results[i]){
 					resultsString = resultsString + result + ",";
 				}
