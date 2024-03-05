@@ -14,7 +14,7 @@
 
 	<groupId>bio.coil</groupId>
 	<artifactId>Sara_Plugin</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.0</version>
 
 	<name>Sara Plugin</name>
 	<description>A project to measure transfection vs colocalisation with DAPI</description>
