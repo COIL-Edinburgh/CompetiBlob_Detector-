@@ -13,11 +13,11 @@
 	</parent>
 
 	<groupId>bio.coil</groupId>
-	<artifactId>Fungal_Track</artifactId>
+	<artifactId>Sara_Plugin</artifactId>
 	<version>1.0.1</version>
 
-	<name>Fungal Tip Track</name>
-	<description>A project to measure and track hyphal length and growth</description>
+	<name>Sara Plugin</name>
+	<description>A project to measure transfection vs colocalisation with DAPI</description>
 	<url>https://www.ed.ac.uk/biology/wcb/centre-optical-instrumentation-laboratory-coil</url>
 	<inceptionYear>2024</inceptionYear>
 	<organization>
@@ -36,7 +36,7 @@
 		<!-- See https://imagej.net/Team -->
 		<developer>
 			<id>CoilEdinburgh</id>
-			<name>David Kelly</name>
+			<name>Toni McHugh</name>
 			<url>https://www.ed.ac.uk/biology/wcb/centre-optical-instrumentation-laboratory-coil</url>
 			<roles>
 				<role>founder</role>
@@ -51,7 +51,7 @@
 	</developers>
 	<contributors>
 		<contributor>
-			<name>Toni McHugh</name>
+			<name>David Kelly</name>
 		</contributor>
 	</contributors>
 
@@ -63,22 +63,22 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:https://github.com/CoilEdinburgh/Fungal_Track</connection>
-		<developerConnection>scm:git:git@github.com:CoilEdinburgh/Fungal_Track</developerConnection>
+		<connection>scm:git:https://github.com/CoilEdinburgh/Sara_Plugin</connection>
+		<developerConnection>scm:git:git@github.com:CoilEdinburgh/Sara_Plugin</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/CoilEdinburgh/Fungal_Track</url>
+		<url>https://github.com/CoilEdinburgh/Sara_Plugin</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/CoilEdinburgh/Fungal_Track/issues</url>
+		<url>https://github.com/CoilEdinburgh/Sara_Plugin/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>None</system>
 	</ciManagement>
 
 	<properties>
-		<package-name>bio.coil.CoilEdinburgh.Fungal_Track</package-name>
-		<main-class>Fungal_Track</main-class>
+		<package-name>bio.coil.CoilEdinburgh.Sara_Plugin</package-name>
+		<main-class>Sara_Plugin</main-class>
 		<license.licenseName>cc0</license.licenseName>
 		<license.copyrightOwners>University of Edinburgh</license.copyrightOwners>
 	</properties>
@@ -91,10 +91,16 @@
 	</repositories>
 
 	<dependencies>
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.mylib</groupId>-->
+		<!--			<artifactId>mylib-core</artifactId>-->
+		<!--			<version>0.0.1</version>-->
+		<!--		</dependency>-->
+
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>imagej</artifactId>
-			<version>2.1.0</version>
 		</dependency>
 		<!-- User-facing commands -->
 		<dependency>
@@ -105,91 +111,60 @@
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>imagej-legacy</artifactId>
-			
 		</dependency>
 		<!-- Include all Fiji plugins when running -->
 		<dependency>
 			<groupId>sc.fiji</groupId>
 			<artifactId>fiji</artifactId>
-			
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/ome/bioformats_package -->
+		<!-- https://mvnrepository.com/artifact/ome/bio-formats_plugins -->
 		<dependency>
-    		<groupId>ome</groupId>
-    		<artifactId>bioformats_package</artifactId>
-    	  	<version>7.0.0</version> 
-    		<type>pom</type>
-    		<exclusions>
-					<exclusion>
-						<groupId>xalan</groupId>
-						<artifactId>serializer</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xalan</groupId>
-						<artifactId>xalan</artifactId>
-					</exclusion>
-			</exclusions>		
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/ome/bio-formats_plugins 
-	 	<dependency>
-    		<groupId>ome</groupId>
-    		<artifactId>bio-formats_plugins</artifactId>
-    	</dependency>
-		 -->
-		<dependency>
-  			<groupId>io.scif</groupId>
-  			<artifactId>scifio</artifactId>
-		</dependency>
-		
-  		<dependency>
-  			<groupId>io.scif</groupId>
-  			<artifactId>scifio-bf-compat</artifactId>
+			<groupId>ome</groupId>
+			<artifactId>bio-formats_plugins</artifactId>
 		</dependency>
 
 		<dependency>
-  			<groupId>ome</groupId>
-  			<artifactId>formats-gpl</artifactId>
-  			<version>${formats-gpl.version}</version><!--$NO-MVN-MAN-VER$-->
+			<groupId>io.scif</groupId>
+			<artifactId>scifio</artifactId>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/net.imglib2/imglib2-labkit -->
+
 		<dependency>
-    		<groupId>net.imglib2</groupId>
-    		<artifactId>imglib2-labkit</artifactId>
-    		<version>0.2.2</version> 
+			<groupId>io.scif</groupId>
+			<artifactId>scifio-bf-compat</artifactId>
 		</dependency>
-    
-		<!-- https://mvnrepository.com/artifact/sc.fiji/labkit-ui -->
+
 		<dependency>
-    		<groupId>sc.fiji</groupId>
-    		<artifactId>labkit-ui</artifactId>
-    		<version>0.3.4</version>
+			<groupId>ome</groupId>
+			<artifactId>formats-gpl</artifactId>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/sc.fiji/labkit-pixel-classification -->
+
 		<dependency>
-    		<groupId>sc.fiji</groupId>
-    		<artifactId>labkit-pixel-classification</artifactId>
-    		<version>0.1.16</version>
+			<groupId>sc.fiji</groupId>
+			<artifactId>KymographBuilder</artifactId>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/net.haesleinhuepf/clij2_ -->
+
+		<!-- https://mvnrepository.com/artifact/sc.fiji/TurboReg_ -->
 		<dependency>
-    		<groupId>net.haesleinhuepf</groupId>
-    		<artifactId>clij2_</artifactId>
-    		<version>2.2.1.0</version>
+			<groupId>sc.fiji</groupId>
+			<artifactId>TurboReg_</artifactId>
+			<version>2.0.0</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/net.haesleinhuepf/clij-core -->
+
+		<!-- https://mvnrepository.com/artifact/sc.fiji/TransformJ_ -->
 		<dependency>
-    		<groupId>net.haesleinhuepf</groupId>
-    		<artifactId>clij-core</artifactId>
-    		<version>1.7.4.0</version>
+			<groupId>sc.fiji</groupId>
+			<artifactId>TransformJ_</artifactId>
+			<version>4.0.0</version>
 		</dependency>
-		
-		
+
+		<!-- https://mvnrepository.com/artifact/ch.epfl.biop/ijl-utilities-wrappers -->
+		<dependency>
+			<groupId>ch.epfl.biop</groupId>
+			<artifactId>ijl-utilities-wrappers</artifactId>
+			<version>0.7.10</version>
+		</dependency>
+
+
 	</dependencies>
 	
 </project>
