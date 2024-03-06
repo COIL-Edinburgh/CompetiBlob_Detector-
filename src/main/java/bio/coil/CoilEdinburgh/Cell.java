@@ -15,37 +15,23 @@ public class Cell {
         this.spots = new ArrayList<>();
     }
 
-    public boolean containsNucleii(Roi newRoi){
-        int x = (int) newRoi.getContourCentroid()[0];
-        int y = (int) newRoi.getContourCentroid()[1];
-        if(roi.contains(x,y)){
-            return true;
-        }
-        return false;
-    }
-
     public void addSpot(Roi newRoi){
         spots.add(newRoi);
     }
 
-    public int nNuceli(){
-        return spots.size();
-    }
+    public double totalArea() { return  roi.getStatistics().area;}
 
     public double spotsArea(){
         double spotArea = 0;
         for(int i = 0; i< spots.size();i++){
             spotArea = spotArea + spots.get(i).getStatistics().area;
         }
-        //spotArea = spotArea/spots.size();
         return spotArea;
     }
 
     public double cellArea(){
-        return roi.getStatistics().area - spotsArea();
+        return totalArea() - spotsArea();
     }
-
-    public double totalArea() { return  roi.getStatistics().area;}
 
     public double spotsIntensity(ImagePlus imp){
         ImageProcessor ip = imp.getProcessor();
@@ -57,16 +43,29 @@ public class Cell {
         return spotIntensity/spotsArea();
     }
 
-    public double cellIntensity(ImagePlus imp){
-        double totalInt = totalIntensity(imp)*totalArea();
-        double spotsInt = spotsArea()*spotsIntensity(imp);
-        return (totalInt - spotsInt)/cellArea();
-    }
-
     public double totalIntensity(ImagePlus imp){
         ImageProcessor ip = imp.getProcessor();
         ip.setRoi(roi);
         return ip.getStatistics().mean;
+    }
+
+    public double cellIntensity(ImagePlus imp){
+        double totalInt = totalIntensity(imp)*totalArea();
+        double spotsInt = spotsIntensity(imp)*spotsArea();
+        return (totalInt - spotsInt)/cellArea();
+    }
+
+    public int nSpots(){
+        return spots.size();
+    }
+
+    public boolean containsSpot(Roi newRoi){
+        int x = (int) newRoi.getContourCentroid()[0];
+        int y = (int) newRoi.getContourCentroid()[1];
+        if(roi.contains(x,y)){
+            return true;
+        }
+        return false;
     }
 
 }
