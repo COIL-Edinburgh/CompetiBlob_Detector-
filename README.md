@@ -1,67 +1,40 @@
-This is an example Maven project implementing an ImageJ2 command.
+##Sara_Plugin
 
-For an example Maven project implementing an **original ImageJ plugin**, see:
-    https://github.com/imagej/example-legacy-plugin
+A plugin to investigate the relationship between Colocalisation of the protein of interest with DNA and 
+transfection levels of a second protein. 
 
-It is intended as an ideal starting point to develop new ImageJ2 commands
-in an IDE of your choice. You can even collaborate with developers using a
-different IDE than you.
+###Input:
+The plugin takes as input a folder of three channel, Z-stack .czi files;
 
-* In [Eclipse](http://eclipse.org), for example, it is as simple as
-  _File &#8250; Import... &#8250; Existing Maven Project_.
+   - Ch0 = Protein of interest
+   - Ch1 = Transfected protein
+   - Ch0 = Nuclear Stain
 
-* In [NetBeans](http://netbeans.org), it is even simpler:
-  _File &#8250; Open Project_.
+The plugin requires the path to the cellpose environment and the cellpose models to be used to be provided. We tested
+using the nucleitorch_3 model.
 
-* The same works in [IntelliJ](http://jetbrains.net).
+###Method:
 
-* If [jEdit](http://jedit.org) is your preferred IDE, you will need the
-  [Maven Plugin](http://plugins.jedit.org/plugins/?MavenPlugin).
+- The plugin performs an "Average" Z-projection on all channels.
+- The plugin uses the cellpose model with a diameter of 14 microns  to segment the nuclei in Ch2. 
+- A 25 pixel rolling-ball background subtraction is applied to Ch2 then a Yen threshold is applied to each nucleus to 
+  segment out bright spots. 
+- The area and intensity of the nucleus, the bright spots within the nucleus and the background within the nucleus are 
+reported for Ch0 and Ch2.
+- The intensity of each nucleus in Ch1 (level of transfection) is reported.
 
-Die-hard command-line developers can use Maven directly by calling `mvn`
-in the project root.
+###Output:
 
-However you build the project, in the end you will have the `.jar` file
-(called *artifact* in Maven speak) in the `target/` subdirectory.
+For each file processed a filename_Overlay.tif will be saved with the detected spots and numbered nuclei drawn in a 4th 
+channel.
 
-To copy the artifact into the correct place, you can call
-`mvn -Dscijava.app.directory="/path/to/ImageJ2.app/"`.
-This will not only copy your artifact, but also all the dependencies.
+If the input files are named according to 'Genotype_N-Airyscan Processing.czi' the plugin will create results files 
+labelled Genotype_Results.csv. With each repetition (N) numbered in the file. If the files do not contain the String 
+"-Airy" a separate results file will be created for each file. The _results .csv file contains for each nucleus;
 
-Developing code in an IDE is convenient, especially for debugging.
-To that end, this project contains a `main` method which launches ImageJ2,
-loads an image and runs the command.
+File | Cell | Cell Area | Cell Intensity Ch0 | Cell Intensity Ch1 | Cell Intensity Ch2 | Spots Area | 
+Spots Intensity Ch0 | Spots Intensity Ch2 | Background Area | Background Intensity Ch0 | Background Intensity Ch2 |
 
-Since this project is intended as a starting point for your own
-developments, it is in the public domain.
 
-How to use this project as a starting point
-===========================================
 
-1. Visit [this link](https://github.com/imagej/example-imagej2-command/generate)
-   to create a new repository in your space using this one as a template.
 
-2. [Clone your new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
-
-3. Edit the `pom.xml` file, fixing all the lines labeled `FIXME`.
-
-4. Remove the `GaussFiltering.java` file and add your own `.java` files
-   to `src/main/java/<package>/` (if you need supporting files such as icons
-   in the resulting `.jar` file, put them into `src/main/resources/`)
-
-5. Replace the contents of `README.md` with information about your project.
-
-6. Make your initial
-   [commit](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project) and
-   [push the results](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository)!
-
-### Eclipse: To ensure that Maven copies the command to your ImageJ2 folder
-
-1. Go to _Run Configurations..._
-2. Choose _Maven Build_
-3. Add the following parameter:
-    - name: `scijava.app.directory`
-    - value: `/path/to/ImageJ2.app/`
-
-This ensures that the final `.jar` file will also be copied
-into your ImageJ2 folder everytime you run the Maven build.

@@ -106,7 +106,8 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
 				split[2].show();
 
 				//Run Cellpose on channel 3
-				Cellpose_Wrapper cpw = new Cellpose_Wrapper(modelpath.getPath(), envpath.getPath(), 150, split[2]);
+				int size = (int) ( 14/pixelsize);
+				Cellpose_Wrapper cpw = new Cellpose_Wrapper(modelpath.getPath(), envpath.getPath(), size, split[2]);
 				cpw.run(true);
 				Roi[] cellRois = roiManager.getRoisAsArray();
 				roiManager.reset();
