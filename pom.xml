@@ -13,10 +13,10 @@
 	</parent>
 
 	<groupId>bio.coil</groupId>
-	<artifactId>Sara_Plugin</artifactId>
+	<artifactId>CompetiBlob_Detector</artifactId>
 	<version>1.0.0</version>
 
-	<name>Sara Plugin</name>
+	<name>CompetiBlob Detector+</name>
 	<description>A project to measure transfection vs colocalisation with DAPI</description>
 	<url>https://www.ed.ac.uk/biology/wcb/centre-optical-instrumentation-laboratory-coil</url>
 	<inceptionYear>2024</inceptionYear>
@@ -63,22 +63,22 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:https://github.com/CoilEdinburgh/Sara_Plugin</connection>
-		<developerConnection>scm:git:git@github.com:CoilEdinburgh/Sara_Plugin</developerConnection>
+		<connection>scm:git:https://github.com/CoilEdinburgh/CompetiBlob_Detector</connection>
+		<developerConnection>scm:git:git@github.com:CoilEdinburgh/CompetiBlob_Detector</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/CoilEdinburgh/Sara_Plugin</url>
+		<url>https://github.com/CoilEdinburgh/CompetiBlob_Detector</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/CoilEdinburgh/Sara_Plugin/issues</url>
+		<url>https://github.com/CoilEdinburgh/CompetiBlob_Detector/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>None</system>
 	</ciManagement>
 
 	<properties>
-		<package-name>bio.coil.CoilEdinburgh.Sara_Plugin</package-name>
-		<main-class>Sara_Plugin</main-class>
+		<package-name>bio.coil.CoilEdinburgh.CompetiBlob_Detector</package-name>
+		<main-class>CompetiBlob_Detector</main-class>
 		<license.licenseName>cc0</license.licenseName>
 		<license.copyrightOwners>University of Edinburgh</license.copyrightOwners>
 	</properties>

@@ -1,4 +1,4 @@
-## Sara_Plugin
+## CompetiBlob Detector+
 
 A plugin to investigate the relationship between colocalisation of the protein of interest with DNA and 
 transfection levels of a second protein. 

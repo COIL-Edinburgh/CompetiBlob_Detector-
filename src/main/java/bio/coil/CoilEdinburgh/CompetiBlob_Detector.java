@@ -16,7 +16,6 @@ import ij.plugin.ChannelSplitter;
 import ij.plugin.ZProjector;
 import ij.plugin.frame.RoiManager;
 import ij.process.ImageProcessor;
-import io.scif.bf.BioFormatsFormat;
 import io.scif.services.DatasetIOService;
 import io.scif.services.FormatService;
 import net.imagej.ImageJ;
@@ -25,7 +24,6 @@ import net.imagej.roi.ROIService;
 import net.imglib2.type.numeric.RealType;
 import org.apache.commons.io.FilenameUtils;
 import org.scijava.command.Command;
-import org.scijava.convert.ConvertService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import org.scijava.ui.UIService;
@@ -43,8 +41,8 @@ import java.util.Date;
 /**
  *
  */
-@Plugin(type = Command.class, menuPath = "Plugins>Users Plugins>Sara Plugin")
-public class Sara_Plugin<T extends RealType<T>> implements Command {
+@Plugin(type = Command.class, menuPath = "Plugins>Users Plugins>CompetiBlob Detector+")
+public class CompetiBlob_Detector<T extends RealType<T>> implements Command {
 
     @Parameter
     private FormatService formatService;
@@ -260,7 +258,7 @@ public class Sara_Plugin<T extends RealType<T>> implements Command {
         // create the ImageJ application context with all available services
         final ImageJ ij = new ImageJ();
         ij.ui().showUI();
-        ij.command().run(Sara_Plugin.class, true);
+        ij.command().run(CompetiBlob_Detector.class, true);
     }
 
 }
