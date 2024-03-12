@@ -91,7 +91,7 @@ private  List<String> getCmd(int diameter, String model){
     cmd.add("&");
     List<String> cellpose_args_cmd = Arrays.asList("python", "-Xutf8", "-m", "cellpose");
     cmd.addAll(cellpose_args_cmd);
-    List<String> options = Arrays.asList("--diameter",diameter+"","--verbose", "--pretrained_model", model,"--save_tif", "--dir",temp.getPath().toString());
+    List<String> options = Arrays.asList("--diameter",diameter+"","--verbose", "--pretrained_model", model,"--save_tif","--use_gpu", "--dir",temp.getPath().toString());
     cmd.addAll(options);
     if (imp.getNChannels()==2){
         List<String> options2 = Arrays.asList("--chan", 2+"","--chan2", 1+"");
