@@ -14,7 +14,7 @@
 
 	<groupId>bio.coil</groupId>
 	<artifactId>CompetiBlob_Detector</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>CompetiBlob Detector+</name>
 	<description>A project to measure transfection vs colocalisation with DAPI</description>

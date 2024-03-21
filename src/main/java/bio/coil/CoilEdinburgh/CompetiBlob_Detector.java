@@ -166,7 +166,7 @@ public class CompetiBlob_Detector<T extends RealType<T>> implements Command {
         for (int i = 0; i < rois.length; i++) {
             imp.setRoi(rois[i]);
             IJ.run(imp, "Subtract Background...", "rolling=25");
-            IJ.setAutoThreshold(imp, "Yen dark");
+            IJ.setAutoThreshold(imp, "Otsu dark");
             IJ.run(imp, "Analyze Particles...", "size=10-Infinity pixel exclude add");
             cells[i] = new Cell(rois[i]);
             Roi[] spotROIs = roiManager.getRoisAsArray();
