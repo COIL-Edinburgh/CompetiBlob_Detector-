@@ -101,8 +101,13 @@ public class CompetiBlob_Detector<T extends RealType<T>> implements Command {
                 ImagePlus impZ = ZProjector.run(imp, "Average");
                 ImagePlus[] split = ChannelSplitter.split(impZ);
                 split[0].show();
+                IJ.log(split[0].getNChannels()+"_");
+
                 split[1].show();
+                IJ.log(split[1].getNChannels()+"_");
+
                 split[2].show();
+                IJ.log(split[2].getNChannels()+"_");
 
                 //Run Cellpose on channel 3
                 int size = (int) (14 / pixelsize);
@@ -112,6 +117,7 @@ public class CompetiBlob_Detector<T extends RealType<T>> implements Command {
                 roiManager.reset();
 
                 //Threshold spots on channel 3 (Yen)
+                split[2].show();
                 Cell[] cells = getSpots(split[2], cellRois);
 
                 // Measure spots and background area and intensity per cell in channels 1 and 3
