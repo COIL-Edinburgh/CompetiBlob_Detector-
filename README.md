@@ -17,7 +17,7 @@ using the nucleitorch_3 model.
 
 - The plugin performs an "Average" Z-projection on all channels.
 - The plugin uses the cellpose model with a diameter of 14 microns  to segment the nuclei in Ch2. 
-- A 25 pixel rolling-ball background subtraction is applied to Ch2 then a Yen threshold is applied to each nucleus to 
+- A 25 pixel rolling-ball background subtraction is applied to Ch2 then an Otsu threshold is applied to each nucleus to 
   segment out bright spots. 
 - The area and intensity of the nucleus, the bright spots within the nucleus and the background within the nucleus are 
 reported for Ch0 and Ch2.
