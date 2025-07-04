@@ -8,7 +8,7 @@ The plugin takes as input a folder of three channel, Z-stack .czi files;
 
    - Ch0 = Protein of interest
    - Ch1 = Transfected protein
-   - Ch0 = Nuclear Stain
+   - Ch2 = Nuclear Stain
 
 The plugin requires the path to the cellpose environment and the cellpose models to be used to be provided. We tested
 using the nucleitorch_3 model.
