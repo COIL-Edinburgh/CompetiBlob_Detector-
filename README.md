@@ -10,7 +10,7 @@ The plugin takes as input a folder of three channel, Z-stack .czi files;
    - Ch1 = Transfected protein
    - Ch2 = Nuclear Stain
 
-The plugin requires the path to the cellpose environment and the cellpose models to be used to be provided. We tested
+The plugin requires the path to the cellpose environment and the cellpose models to be used to be provided [1]. We tested
 using the nucleitorch_3 model.
 
 ### Method:
@@ -36,6 +36,6 @@ contains for each nucleus;
 File | Cell | Cell Area | Cell Intensity Ch0 | Cell Intensity Ch1 | Cell Intensity Ch2 | Spots Area | 
 Spots Intensity Ch0 | Spots Intensity Ch2 | Background Area | Background Intensity Ch0 | Background Intensity Ch2 |
 
-
+[1] Stringer, C., Wang, T., Michaelos, M., & Pachitariu, M. (2021). Cellpose: a generalist algorithm for cellular segmentation. Nature methods, 18(1), 100-106.
 
 
